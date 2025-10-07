@@ -41,7 +41,7 @@ jobs:
         run: |
           echo "APP_KEY=$(php artisan key:generate --show)" > .env.testing
           echo "DB_CONNECTION=pgsql" >> .env.testing
-          echo "DB_HOST=postgres" >> .env.testing
+          echo "DB_HOST=0.0.0.0" >> .env.testing
           echo "DB_PORT=5432" >> .env.testing
           echo "DB_DATABASE=testing" >> .env.testing
           echo "DB_USERNAME=github" >> .env.testing
