@@ -39,7 +39,7 @@ jobs:
 
       - name: Generate .env for CI
         run: |
-          echo "APP_KEY=$(php artisan key:generate --show)" > .env
+          echo "APP_KEY=$(php artisan key:generate --show)" > .env.testing
           echo "DB_CONNECTION=pgsql" >> .env
           echo "DB_HOST=127.0.0.1" >> .env
           echo "DB_PORT=5432" >> .env
@@ -51,7 +51,7 @@ jobs:
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Run migrations
-        run: php artisan migrate --force
+        run: php artisan migrate --env=testing --force
       
       - name: Run tests with coverage
-        run: php artisan test --coverage-clover=coverage.xml
+        run: php artisan test --env=testing --coverage-clover=coverage.xml
