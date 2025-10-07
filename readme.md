@@ -1,0 +1,1 @@
+[![codecov](https://codecov.io/gh/Aleshua/technical-support-application-system/graph/badge.svg?token=MMK2O187HA)](https://codecov.io/gh/Aleshua/technical-support-application-system)
