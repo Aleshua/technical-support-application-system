@@ -1,0 +1,57 @@
+name: Run Laravel Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: github
+          POSTGRES_PASSWORD: github
+          POSTGRES_DB: testing
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U github"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, bcmath, pdo, pdo_pgsql, pgsql, tokenizer, xml, curl, json, openssl
+          coverage: xdebug
+
+      - name: Generate .env for CI
+        run: |
+          echo "APP_KEY=$(php artisan key:generate --show)" > .env
+          echo "DB_CONNECTION=pgsql" >> .env
+          echo "DB_HOST=postgres" >> .env
+          echo "DB_PORT=5432" >> .env
+          echo "DB_DATABASE=testing" >> .env
+          echo "DB_USERNAME=github" >> .env
+          echo "DB_PASSWORD=github" >> .env
+
+      - name: Install dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Run migrations
+        run: php artisan migrate --force
+      
+      - name: Run tests with coverage
+        run: php artisan test --coverage-clover=coverage.xml
