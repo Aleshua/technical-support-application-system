@@ -40,12 +40,12 @@ jobs:
       - name: Generate .env for CI
         run: |
           echo "APP_KEY=$(php artisan key:generate --show)" > .env.testing
-          echo "DB_CONNECTION=pgsql" >> .env
-          echo "DB_HOST=postgres" >> .env
-          echo "DB_PORT=5432" >> .env
-          echo "DB_DATABASE=testing" >> .env
-          echo "DB_USERNAME=github" >> .env
-          echo "DB_PASSWORD=github" >> .env
+          echo "DB_CONNECTION=pgsql" >> .env.testing
+          echo "DB_HOST=postgres" >> .env.testing
+          echo "DB_PORT=5432" >> .env.testing
+          echo "DB_DATABASE=testing" >> .env.testing
+          echo "DB_USERNAME=github" >> .env.testing
+          echo "DB_PASSWORD=github" >> .env.testing
 
       - name: Install dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
