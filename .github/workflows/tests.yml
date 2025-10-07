@@ -39,9 +39,10 @@ jobs:
 
       - name: Generate .env for CI
         run: |
-          sed -i 's/^DB_USER=.*/DB_USER=github/' .env.testing
-          sed -i 's/^DB_PASS=.*/DB_PASS=github/' .env.testing
-          sed -i 's/^DB_NAME=.*/DB_NAME=testing/' .env.testing
+          sed -i 's/^DB_USERNAME=.*/DB_USERNAME=github/' .env.testing
+          sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=github/' .env.testing
+          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=testing/' .env.testing
+          sed -i 's/^DB_HOST=.*/DB_HOST=0.0.0.0/' .env.testing
 
       - name: Install dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
