@@ -13,6 +13,7 @@ class ApiMessages
 
     public const AUTHORIZATION_EXCEPTION = "Authorization exception";
     public const AUTHENTICATION_EXCEPTION = "Authentication exception";
+    public const FORBIDDEN = "Not enough rights";
 
     public const MODEL_NOT_FOUND = "Record not found";
 
@@ -22,5 +23,8 @@ class ApiMessages
     public const EMAIL_VERIFIED = "Email verified successfully";
     public const EMAIL_NOT_VERIFIED = "Email not verified";
     public const EMAIL_RESENDED = "Please verify your email";
+
+    public const ENTITY_UPDATED = "Entity updated";
+    public const ENTITY_DELETED = "Entity deleted";
 
 }

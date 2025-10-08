@@ -4,6 +4,7 @@ namespace App\Http;
 
 use Illuminate\Foundation\Configuration\Exceptions;
 
+use Log;
 use Throwable;
 use PDOException;
 
@@ -79,14 +80,22 @@ class ApiExceptionHandler
                     );
             }
 
+            Log::error($e->getMessage());
+
             return ApiResponses::message(ApiMessages::SERVER_ERROR, 500);
         });
 
         $exceptions->render(function (PDOException $e) {
+
+            Log::error($e->getMessage());
+            
             return ApiResponses::message(ApiMessages::SERVER_ERROR, 500);
         });
 
         $exceptions->render(function (Throwable $e) {
+
+            Log::error($e->getMessage());
+
             return ApiResponses::message(ApiMessages::SERVER_ERROR, 500);
         });
     }

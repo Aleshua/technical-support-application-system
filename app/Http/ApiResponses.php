@@ -26,7 +26,7 @@ class ApiResponses
         return response()->json($response, $status);
     }
 
-    public static function data(string $message, int $status, array $data): JsonResponse
+    public static function data(string $message, int $status, array|object $data): JsonResponse
     {
         $response = [];
 
