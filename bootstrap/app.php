@@ -12,7 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: [
             __DIR__ . '/../routes/auth.php',
-            __DIR__ . '/../routes/user.php'
+            __DIR__ . '/../routes/user.php',
+            __DIR__ . '/../routes/ticket.php'
         ],
         health: '/up',
     )

@@ -26,7 +26,7 @@ class ApiResponses
         return response()->json($response, $status);
     }
 
-    public static function data(string $message, int $status, array|object $data): JsonResponse
+    public static function data(string $message, int $status, array|object $data, array $meta = []): JsonResponse
     {
         $response = [];
 
@@ -35,6 +35,10 @@ class ApiResponses
         }
 
         $response['data'] = $data;
+
+        if (count($meta) !== 0) {
+            $response['meta'] = $meta;
+        }
 
         return response()->json($response, $status);
     }

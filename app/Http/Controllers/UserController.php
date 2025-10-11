@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Log;
-
-use App\Http\ApiResponses;
 use App\Http\ApiMessages;
+use App\Http\ApiResponses;
 use App\Http\Controllers\Controller;
 
 use App\UseCases\Ports\IUserUseCases;

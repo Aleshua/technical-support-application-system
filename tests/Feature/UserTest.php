@@ -87,4 +87,24 @@ class UserTest extends TestCase
         $userUpdated = User::find($user->id);
         $this->assertEquals('operator', $userUpdated->role);
     }
+
+    #[Test]
+    public function user_cannot_update_role_another_user()
+    {
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
+
+        $data = [
+            'role' => 'operator',
+        ];
+
+        $this->actingAs($user2);
+
+        $response = $this->patch("/users/{$user1->id}/role", $data);
+
+        $response->assertStatus(403);
+
+        $userUpdated = User::find($user1->id);
+        $this->assertEquals('user', $userUpdated->role);
+    }
 }

@@ -27,4 +27,7 @@ class ApiMessages
     public const ENTITY_UPDATED = "Entity updated";
     public const ENTITY_DELETED = "Entity deleted";
 
+    public const EXECUTOR_ASSIGN = "Executor assign";
+    public const TICKET_CLOSED = "Ticket closed";
+
 }

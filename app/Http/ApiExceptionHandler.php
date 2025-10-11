@@ -16,6 +16,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
 
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
@@ -85,10 +86,20 @@ class ApiExceptionHandler
             return ApiResponses::message(ApiMessages::SERVER_ERROR, 500);
         });
 
+        $exceptions->render(function (HttpException $e) {
+            if ($e->getStatusCode() === 403) {
+                return ApiResponses::message(ApiMessages::AUTHORIZATION_EXCEPTION, 403);
+            }
+
+            Log::error($e->getMessage());
+
+            return ApiResponses::message(ApiMessages::SERVER_ERROR, 500);
+        });
+
         $exceptions->render(function (PDOException $e) {
 
             Log::error($e->getMessage());
-            
+
             return ApiResponses::message(ApiMessages::SERVER_ERROR, 500);
         });
 

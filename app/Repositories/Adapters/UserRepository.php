@@ -6,8 +6,6 @@ use App\Models\User;
 
 use App\Repositories\Ports\IUserRepository;
 
-use Log;
-use Auth;
 use Illuminate\Support\Facades\Gate;
 
 class UserRepository implements IUserRepository
