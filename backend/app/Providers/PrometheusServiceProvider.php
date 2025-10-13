@@ -32,29 +32,30 @@ class PrometheusServiceProvider extends ServiceProvider
     public function boot(CollectorRegistry $registry)
     {
         try {
-        $registry->getOrRegisterGauge(
-            'app',
-            'users_total',
-            'Total users'
-        )->set(User::count());
+            $registry->getOrRegisterGauge(
+                'app',
+                'users_total',
+                'Total users'
+            )->set(User::count());
 
-        $registry->getOrRegisterGauge(
-            'app',
-            'tickets_total',
-            'Total tickets'
-        )->set(Ticket::count());
+            $registry->getOrRegisterGauge(
+                'app',
+                'tickets_total',
+                'Total tickets'
+            )->set(Ticket::count());
 
-        $registry->getOrRegisterGauge(
-            'app',
-            'tickets_open',
-            'Open tickets'
-        )->set(Ticket::where('status', 'open')->count());
+            $registry->getOrRegisterGauge(
+                'app',
+                'tickets_open',
+                'Open tickets'
+            )->set(Ticket::where('status', 'open')->count());
 
-        $registry->getOrRegisterGauge(
-            'app',
-            'tickets_closed',
-            'Closed tickets'
-        )->set(Ticket::where('status', 'closed')->count());
-        } catch (Exception $e) {}
+            $registry->getOrRegisterGauge(
+                'app',
+                'tickets_closed',
+                'Closed tickets'
+            )->set(Ticket::where('status', 'closed')->count());
+        } catch (Exception $e) {
+        }
     }
 }

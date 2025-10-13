@@ -37,6 +37,8 @@ jobs:
 
       redis:
         image: redis:7
+        env:
+          REDIS_PASSWORD: github
         ports:
           - 6379:6379
         options: >-
@@ -64,7 +66,7 @@ jobs:
           sed -i 's/^DB_DATABASE=.*/DB_DATABASE=testing/' .env.testing
           sed -i 's/^DB_HOST=.*/DB_HOST=0.0.0.0/' .env.testing
           sed -i 's/^REDIS_HOST=.*/REDIS_HOST=0.0.0.0/' .env.testing
-          sed -i 's/^REDIS_PASSWORD=.*/REDIS_PASSWORD=/' .env.testing
+          sed -i 's/^REDIS_PASSWORD=.*/REDIS_PASSWORD=github/' .env.testing
           sed -i 's/^REDIS_PORT=.*/REDIS_PORT=6379/' .env.testing
 
       - name: Install dependencies
