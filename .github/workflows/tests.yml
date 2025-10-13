@@ -67,11 +67,11 @@ jobs:
           sed -i 's/^REDIS_PASSWORD=.*/REDIS_PASSWORD=/' .env.testing
           sed -i 's/^REDIS_PORT=.*/REDIS_PORT=6379/' .env.testing
 
-      - name: Install dependencies
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
-
       - name: Run migrations
         run: php artisan migrate --env=testing --force
+
+      - name: Install dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
       
       - name: Run tests with coverage
         run: php artisan test --env=testing --coverage-clover=coverage.xml
