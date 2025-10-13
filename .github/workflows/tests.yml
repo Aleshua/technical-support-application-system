@@ -4,9 +4,11 @@ on:
   push:
     branches: [ main ]
     paths:
+      - '.github/**'
       - 'backend/**'
   pull_request:
     paths:
+      - '.github/**'
       - 'backend/**'
 
 
