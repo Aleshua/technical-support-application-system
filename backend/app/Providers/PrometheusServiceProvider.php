@@ -8,6 +8,7 @@ use App\Models\Ticket;
 use Prometheus\Storage\Redis;
 use Prometheus\CollectorRegistry;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,28 +30,32 @@ class PrometheusServiceProvider extends ServiceProvider
 
     public function boot(CollectorRegistry $registry)
     {
-        $registry->getOrRegisterGauge(
-            'app',
-            'users_total',
-            'Total users'
-        )->set(User::count());
+        if (Schema::hasTable('users')) {
+            $registry->getOrRegisterGauge(
+                'app',
+                'users_total',
+                'Total users'
+            )->set(User::count());
+        }
 
-        $registry->getOrRegisterGauge(
-            'app',
-            'tickets_total',
-            'Total tickets'
-        )->set(Ticket::count());
+        if (Schema::hasTable('tickets')) {
+            $registry->getOrRegisterGauge(
+                'app',
+                'tickets_total',
+                'Total tickets'
+            )->set(Ticket::count());
 
-        $registry->getOrRegisterGauge(
-            'app',
-            'tickets_open',
-            'Open tickets'
-        )->set(Ticket::where('status', 'open')->count());
+            $registry->getOrRegisterGauge(
+                'app',
+                'tickets_open',
+                'Open tickets'
+            )->set(Ticket::where('status', 'open')->count());
 
-        $registry->getOrRegisterGauge(
-            'app',
-            'tickets_closed',
-            'Closed tickets'
-        )->set(Ticket::where('status', 'closed')->count());
+            $registry->getOrRegisterGauge(
+                'app',
+                'tickets_closed',
+                'Closed tickets'
+            )->set(Ticket::where('status', 'closed')->count());
+        }
     }
 }
