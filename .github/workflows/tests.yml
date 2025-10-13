@@ -41,8 +41,9 @@ jobs:
           REDIS_PASSWORD: github
         ports:
           - 6379:6379
+        command: ["redis-server", "--requirepass", "github"]
         options: >-
-          --health-cmd="redis-cli ping"
+          --health-cmd="redis-cli ping -a github"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
