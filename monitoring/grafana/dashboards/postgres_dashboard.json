@@ -1,0 +1,25 @@
+{
+    "annotations": {
+        "list": []
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "preload": false,
+    "schemaVersion": 42,
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-1h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "Postgres",
+    "uid": "postgres_dashboard",
+    "version": 0,
+    "panels": []
+}

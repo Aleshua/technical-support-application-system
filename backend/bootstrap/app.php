@@ -3,6 +3,7 @@
 use App\Http\ApiExceptionHandler;
 
 use App\Http\Middleware\RoleMiddleware;
+use App\Http\Middleware\PrometheusMetricsMiddleware;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -13,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
         web: [
             __DIR__ . '/../routes/auth.php',
             __DIR__ . '/../routes/user.php',
-            __DIR__ . '/../routes/ticket.php'
+            __DIR__ . '/../routes/ticket.php',
+            __DIR__ . '/../routes/metrics.php',
         ],
         health: '/up',
     )
@@ -21,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => RoleMiddleware::class,
         ]);
+        $middleware->append(PrometheusMetricsMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         ApiExceptionHandler::processing($exceptions);
