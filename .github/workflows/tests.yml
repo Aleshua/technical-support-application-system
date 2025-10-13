@@ -40,8 +40,7 @@ jobs:
         ports:
           - 6379:6379
         options: >-
-          --requirepass github
-          --health-cmd="redis-cli ping -a github"
+          --health-cmd="redis-cli ping"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -65,7 +64,7 @@ jobs:
           sed -i 's/^DB_DATABASE=.*/DB_DATABASE=testing/' .env.testing
           sed -i 's/^DB_HOST=.*/DB_HOST=0.0.0.0/' .env.testing
           sed -i 's/^REDIS_HOST=.*/REDIS_HOST=0.0.0.0/' .env.testing
-          sed -i 's/^REDIS_PASSWORD=.*/REDIS_PASSWORD=github/' .env.testing
+          sed -i '/^REDIS_PASSWORD/d' .env.testing
           sed -i 's/^REDIS_PORT=.*/REDIS_PORT=6379/' .env.testing
 
       - name: Install dependencies
